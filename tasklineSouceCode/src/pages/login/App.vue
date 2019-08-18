@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <AuthReturnTrello/>
+        <LoginComponent/>
     </div>
 </template>
 
@@ -52,9 +52,15 @@
     }
 </style>
 <script>
-  import AuthReturnTrello from "./views/AuthReturnTrello";
+  import LoginComponent from "../../views/LoginComponent";
 
   export default {
-    components: {AuthReturnTrello}
+    components: {LoginComponent},
+    created()
+    {
+      console.log('login.vue');
+
+    }
+
   }
 </script>

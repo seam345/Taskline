@@ -1,7 +1,7 @@
 import axios from "axios";
 import { TokenService } from "./storageToken";
 
-export const TRELLO_RETURN_PATH = "/trello_auth_token";
+export const TRELLO_RETURN_PATH = "/trello_auth_token.html";
 // export const TRELLO_RETURN_FILENAME = "trello_auth_token.html";
 const DEFAULT_EXPIRATION = "30days";
 const DISPLAY_NAME = "Taskline";

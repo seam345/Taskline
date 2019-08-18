@@ -52,7 +52,7 @@
 }
 </style>
 <script>
-  import GanttChart from "./views/GanttChart";
+  import GanttChart from "../../views/GanttChart";
   export default {
     components: {GanttChart}
   }
