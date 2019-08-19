@@ -40,7 +40,6 @@
                 </select>
             </label>
         </div>
-        <button @click="shuffle()">shuffle</button>
         <div style="float: left; height: 100%; width: 30%">
             <div
               v-for="(task, index) of datelessTasks"
@@ -402,17 +401,6 @@
 
     },
     methods:  {
-      shuffle()
-      {
-        console.log(
-            RestTrello.getStartDate("5c98b731bf624d79b75d691a").then(result =>
-            {
-              console.log(result);
-            })
-        );
-
-        // this.taskGroups = _.shuffle(this.taskGroups);
-      },
       sort()
       {
         this.taskGroups.sort(function (a, b)
