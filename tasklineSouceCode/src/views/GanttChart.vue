@@ -135,20 +135,25 @@
                                 <div
                                   v-for="task of taskGroup.tasks"
                                   :key="task.id"
-                                  class="task"
+                                  class="task tooltip"
                                   :style="{ width: task.width + 'px', left: task.left + 'px' }"
                                   @mousedown="mouseDownTask($event, task)"
                                 >
                                     <!--:style="taskStyle(task)"-->
-                                    <span class="task-chip disable-select">{{ task.name }}</span>
+                                    <div
+                                      :style="{ width: task.width + 'px'}"
+                                      class="task-name-container"
+                                    >
+
+                                        <span class="task-chip disable-select">{{ task.name }}</span>
+                                    </div>
                                     <div
                                       class="start-date-chip"
                                       @mousedown="mouseDownStartDate($event, task)"
                                     >
                                         <i
                                           class="material-icons start-date-chip__icon disable-select"
-                                        >chevron_left</i
-                                        >
+                                        >chevron_left</i>
                                     </div>
                                     <div
                                       class="end-date-chip"
@@ -180,6 +185,9 @@
                                                                                                                                                                                        >
                                                                                                                                                                                            <mat-icon>chevron_right</mat-icon>
                                                                                                                                                                                        </mat-chip>-->
+                                    <div class="passthrough" :style="{ margin: '0px 0px 0px ' + task.width/2 + 'px'}">
+                                        <span class="tooltiptext" >{{ task.name }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </transition-group>
@@ -278,10 +286,10 @@
       console.log('creating');
       console.log(!TokenService.getToken());
       console.log(TokenService.getToken());
-      if (!TokenService.getToken())
+      if ( !TokenService.getToken() )
       {
         console.log('changing url');
-        window.location.href = process.env.VUE_APP_HOST_URL + '/login';
+        window.location.href = process.env.VUE_APP_HOST_URL + '/login.html';
 
       }
       this.monthNames        = [
@@ -1309,7 +1317,7 @@
     .task {
         position: relative;
         white-space: nowrap;
-        overflow: hidden;
+        /*overflow: hidden;*/
         /*text-overflow: ellipsis;*/
 
         background-color: map-get($opposing, 600);
@@ -1327,6 +1335,12 @@
         mat-chip:hover {
             opacity: 1;
         }
+    }
+
+    .task-name-container {
+        border-radius: 25px;
+        height: 30px;
+        overflow: hidden;
     }
 
     .task__drag-and-drop {
@@ -1610,4 +1624,63 @@
             opacity: 0;
         }
     }
+
+    //  <!--<editor-fold desc="very lazy copy paste of w3scools tooltip ">-->
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        /*border-bottom: 1px dotted black;*/
+    }
+
+    .tooltip .tooltiptext {
+        /*visibility: hidden;*/
+        /*width: 120px;*/
+        /*width: fit-content;*/
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 0 5px;
+        /*position: absolute;*/
+        z-index: 1;
+        /*bottom: 30px;*/
+        /*left: 0;*/
+        /*right: 0;*/
+        margin: auto;
+        /*left: 50%;*/
+        /*<!--margin-left: -100% ;-->*/
+        /*<!--margin-left: -60px;-->*/
+    }
+
+    .tooltip .tooltiptext::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: black transparent transparent transparent;
+    }
+
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+    }
+
+    .passthrough {
+        visibility: hidden;
+        width: 2000px;
+        position: absolute;
+        left: -1000px;
+        right: 0;
+        /*margin: auto;*/
+        bottom: 30px;
+
+    }
+
+    .tooltip:hover .passthrough {
+        visibility: visible;
+    }
+
+    // <!--</editor-fold>-->
 </style>
